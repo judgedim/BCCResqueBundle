@@ -23,9 +23,14 @@ class StartWorkerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $host = $this->getContainer()->getParameter('bcc_resque.resque.redis.host');
+        $port = $this->getContainer()->getParameter('bcc_resque.resque.redis.port');
+
         $env = array(
-            'APP_INCLUDE' => $this->getContainer()->getParameter('bcc_resque.resque.vendor_dir').'/autoload.php',
-            'QUEUE'       => $input->getArgument('queues')
+            'APP_INCLUDE'   => $this->getContainer()->getParameter('bcc_resque.resque.vendor_dir').'/autoload.php',
+            'QUEUE'         => $input->getArgument('queues'),
+            'REDIS_BACKEND' => $host . ':' . $port,
+            'DATABASE'      => $this->getContainer()->getParameter('bcc_resque.resque.redis.database')
         );
 
         $workerCommand = 'php '.$this->getContainer()->getParameter('bcc_resque.resque.vendor_dir').'/chrisboulton/php-resque/resque.php';
