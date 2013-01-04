@@ -12,9 +12,15 @@
             "homepage": "michelsalib.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "http://github.com/judgedim/php-resque"
+        }
+    ],
     "require": {
         "symfony/framework-bundle": "<=2.2.x-dev",
-        "chrisboulton/php-resque": "1.2.*"
+        "chrisboulton/php-resque": "dev-master"
     },
     "autoload": {
         "psr-0": { "BCC\\ResqueBundle": "" }
